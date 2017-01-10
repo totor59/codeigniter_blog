@@ -1,6 +1,8 @@
 <html>
         <head>
-                <title>CodeIgniter Tutorial</title>
+                <title>totor.com</title>
+                <script src="<?php echo base_url() . 'assets/ckeditor/ckeditor.js';?>"></script>
+
         </head>
         <body>
 

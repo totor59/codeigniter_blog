@@ -1,3 +1,4 @@
-<?php
-echo '<h2>'.$news_item['title'].'</h2>';
-echo $news_item['content'];
+
+<p><?php echo $blog_item['content'];?></p>
+<br>
+<a href="<?php echo base_url().'blog/'; ?>">BACK TO BLOG INDEX</a>

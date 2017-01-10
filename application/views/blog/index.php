@@ -5,6 +5,6 @@
         <div class="main">
                 <?php echo character_limiter($blog_item['content'], 256);// Extrait de l'article ?>
         </div>
-        <p><a href="<?php echo site_url('news/'.$blog_item['slug']); ?>">Lire la suite</a></p>
+        <p><a href="<?php echo site_url('blog/'.$blog_item['slug']); ?>">Lire la suite</a></p>
 
 <?php endforeach; ?>
