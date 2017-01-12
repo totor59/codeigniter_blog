@@ -5,6 +5,7 @@ class Blog extends CI_Controller {
     parent::__construct();
     $this->load->model('Blog_model');
     $this->load->helper('url_helper');
+    if(!$this->session->userdata('username')) redirect('admin');
   }
 
   public function index()
@@ -12,7 +13,8 @@ class Blog extends CI_Controller {
     $data['blog'] = $this->Blog_model->get_article();
     $data['title'] = 'Blog archive';
     $this->load->view('templates/header', $data);
-    $this->load->view('blog/index', $data);
+    if($this->session->userdata('isadmin')) $this->load->view('blog/admin', $data);
+    else $this->load->view('blog/index', $data);
     $this->load->view('templates/footer');
   }
 
@@ -55,7 +57,7 @@ class Blog extends CI_Controller {
   }
   public function delete($id) {
     $this->Blog_model->delete_article($id);
-    redirect(base_url().'/blog/');
+    redirect(base_url().'blog/');
   }
 
   public function update() {
