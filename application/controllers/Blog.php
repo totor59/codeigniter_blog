@@ -78,8 +78,6 @@ class Blog extends CI_Controller {
     {
       $this->Blog_model->set_article();
       $this->load->view('blog/update_success');
-      redirect(base_url().'/blog/');
-
     }
 
   }
