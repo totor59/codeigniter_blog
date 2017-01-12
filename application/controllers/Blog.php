@@ -52,6 +52,9 @@ class Blog extends CI_Controller {
       $this->load->view('blog/success');
     }
   }
+  public function delete($id) {
+  $this->Blog_model->delete_article($id);
+  redirect(base_url().'/blog/');
 
-
+  }
 }

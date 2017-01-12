@@ -1,5 +1,6 @@
 <?php
 class Blog_model extends CI_Model {
+      private $article= 'article';
   public function __construct()	{
     $this->load->database();
   }
@@ -29,4 +30,11 @@ public function set_article()
 
     return $this->db->insert('article', $data);
 }
+public function delete_article($id)
+  {
+     $this->db->where('id',$id);
+     $this->db->delete('article');
+
+  }
+
 }
