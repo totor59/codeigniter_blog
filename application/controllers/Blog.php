@@ -3,13 +3,13 @@ class Blog extends CI_Controller {
   public function __construct()
   {
     parent::__construct();
-    $this->load->model('blog_model');
+    $this->load->model('Blog_model');
     $this->load->helper('url_helper');
   }
 
   public function index()
   {
-    $data['blog'] = $this->blog_model->get_article();
+    $data['blog'] = $this->Blog_model->get_article();
     $data['title'] = 'Blog archive';
     $this->load->view('templates/header', $data);
     $this->load->view('blog/index', $data);
@@ -18,7 +18,7 @@ class Blog extends CI_Controller {
 
   public function view($slug = NULL)
   {
-    $data['blog_item'] = $this->blog_model->get_article($slug);
+    $data['blog_item'] = $this->Blog_model->get_article($slug);
 
     if (empty($data['blog_item']))
     {
@@ -48,7 +48,7 @@ class Blog extends CI_Controller {
     }
     else
     {
-      $this->blog_model->set_article();
+      $this->Blog_model->set_article();
       $this->load->view('blog/success');
     }
   }

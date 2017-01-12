@@ -1,6 +1,6 @@
 <?php echo validation_errors(); ?>
 
-<?php echo form_open('blog/create'); ?>
+<?php echo form_open('Blog/create'); ?>
 
 <label for="title">Title</label>
 <input type="input" name="title" /><br />
