@@ -25,12 +25,12 @@ CKEDITOR.editorConfig = function( config ) {
 		{ name: 'colors' },
 		{ name: 'about' }
 	];
-	config.filebrowserBrowseUrl = '../assets/js/ckeditor/kcfinder/browse.php?opener=ckeditor&type=files';
-	config.filebrowserImageBrowseUrl = '../assets/js/ckeditor/kcfinder/browse.php?opener=ckeditor&type=images';
-	config.filebrowserFlashBrowseUrl = '../assets/js/ckeditor/kcfinder/browse.php?opener=ckeditor&type=flash';
-	config.filebrowserUploadUrl = '../assets/js/ckeditor/kcfinder/upload.php?opener=ckeditor&type=files';
-	config.filebrowserImageUploadUrl = '../assets/js/ckeditor/kcfinder/upload.php?opener=ckeditor&type=images';
-	config.filebrowserFlashUploadUrl = '../assets/js/ckeditor/kcfinder/upload.php?opener=ckeditor&type=flash';
+	config.filebrowserBrowseUrl = '/totor.com/assets/js/ckeditor/kcfinder/browse.php?opener=ckeditor&type=files';
+	config.filebrowserImageBrowseUrl = '/totor.com/assets/js/ckeditor/kcfinder/browse.php?opener=ckeditor&type=images';
+	config.filebrowserFlashBrowseUrl = '/totor.com/assets/js/ckeditor/kcfinder/browse.php?opener=ckeditor&type=flash';
+	config.filebrowserUploadUrl = '/totor.com/assets/js/ckeditor/kcfinder/upload.php?opener=ckeditor&type=files';
+	config.filebrowserImageUploadUrl = '/totor.com/assets/js/ckeditor/kcfinder/upload.php?opener=ckeditor&type=images';
+	config.filebrowserFlashUploadUrl = '/totor.com/assets/js/ckeditor/kcfinder/upload.php?opener=ckeditor&type=flash';
 	// Remove some buttons provided by the standard plugins, which are
 	// not needed in the Standard(s) toolbar.
 	config.removeButtons = 'Underline,Subscript,Superscript';

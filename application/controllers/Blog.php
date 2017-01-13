@@ -15,6 +15,7 @@ class Blog extends CI_Controller {
     $data['is_admin'] = TRUE;
     }
     $this->load->model('user_model');
+    $data['is_logged_in'] = $this->user_model->is_logged_in();
     $data['blog'] = $this->blog_model->get_article();
     $data['title'] = 'Blog index';
     $this->load->view('templates/header', $data);

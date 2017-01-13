@@ -52,6 +52,7 @@ class Admin extends CI_Controller {
     if ($this->session->usertype === 'admin'){
     $data['is_admin'] = TRUE;
     }
+    $data['is_logged_in'] = $this->user_model->is_logged_in();
     $this->load->model('blog_model');
     $data['blog'] = $this->blog_model->get_article();
     $data['title'] = 'Blog index';
