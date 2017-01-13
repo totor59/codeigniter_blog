@@ -5,32 +5,23 @@ class Blog_model extends CI_Model {
     $this->load->database();
   }
 
-  public function get_article($slug = FALSE)
-  {
-    if ($slug === FALSE)
-    {
+  public function get_article($slug = FALSE) {
+    if ($slug === FALSE) {
       $query = $this->db->get('article');
       return $query->result_array();
     }
-
     $query = $this->db->get_where('article', array('slug' => $slug));
     return $query->row_array();
   }
-  public function get_article_by_id($id = 0)
-  {
-    if ($id === 0)
-    {
-      $query = $this->db->get('article');
-      return $query->result_array();
-    }
 
+  public function get_article_by_id($id)  {
     $query = $this->db->get_where('article', array('id' => $id));
     return $query->row_array();
   }
 
-  public function set_article( $id = 0 )
-  {
+  public function set_article( $id = 0 )  {
     $id = $this->input->post('id');
+    // On crée un slug clean et on utilise convert_accented_characters pour supprimer les accents
     $slug = url_title(convert_accented_characters($this->input->post('title'), 'dash', TRUE));
     $data = array(
       'title' => $this->input->post('title'),
@@ -38,17 +29,17 @@ class Blog_model extends CI_Model {
       'content' => $this->input->post('content')
     );
     if ( $id == 0 ) {
+      // Si l'ID est égal a 0 on insère un nouvel article
       $this->db->insert('article', $data);
     } else {
+      // Sinon on update l'article qui correspond a l'ID
       $this->db->where('id', $id);
       $this->db->update('article', $data);
-
     }
   }
-  public function delete_article($id)
-  {
+
+  public function delete_article($id)  {
     $this->db->where('id',$id);
     $this->db->delete('article');
   }
-
 }
