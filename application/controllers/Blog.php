@@ -44,13 +44,11 @@ class Blog extends CI_Controller {
   }
 
   public function delete($id) {
-    $id = $this->input->post('id');
     $this->blog_model->delete_article($id);
     $this->load->view('blog/delete_success');
   }
 
-  public function update() {
-    $id = $this->input->post('id');
+  public function update($id) {
     $data['blog_item'] = $this->blog_model->get_article_by_id($id);
     $data['title'] = 'Edit a blog item';
     $this->form_validation->set_rules('title', 'Title', 'required');
