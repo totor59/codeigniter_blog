@@ -9,6 +9,7 @@ class Blog extends CI_Controller {
   }
 
   public function index() {
+    $this->output->enable_profiler(true);
     $data['is_admin'] = FALSE;
     if ($this->session->usertype === 'admin'){
     $data['is_admin'] = TRUE;
