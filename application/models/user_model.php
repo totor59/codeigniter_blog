@@ -17,6 +17,7 @@ class User_model extends CI_Model {
       $username = ucfirst($row->username);
       $data = array(
         'username' => $username,
+        'usertype' => $row->usertype,
         'logged_in' => true
       );
       $this->session->set_userdata($data);
@@ -26,6 +27,7 @@ class User_model extends CI_Model {
       return false;
     }
   }
+
   public function is_logged_in(){
     // On vérifie si la variable logged_in est présent dans les variables de session
     if($this->session->userdata('logged_in')) {

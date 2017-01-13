@@ -48,6 +48,10 @@ class Admin extends CI_Controller {
   }
 
   function dashboard(){
+    $data['is_admin'] = FALSE;
+    if ($this->session->usertype === 'admin'){
+    $data['is_admin'] = TRUE;
+    }
     $this->load->model('blog_model');
     $data['blog'] = $this->blog_model->get_article();
     $data['title'] = 'Blog index';

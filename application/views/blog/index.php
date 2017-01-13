@@ -6,14 +6,14 @@
   </div>
   <p><a href="<?php echo site_url('blog/'.$blog_item['slug']); ?>">Lire la suite</a></p>
 
-<?php
-// Si l'utilisateur est loggé on affiche les boutons EDIT et DELETE
-  if($this->user_model->is_logged_in()) {
+  <?php
+  //Si l'utilisateur est loggé on affiche les boutons EDIT et DELETE
+  if($is_admin) {
     echo form_open('blog/update/'.$blog_item['id']);
-         echo form_submit('submit','Edit');
+    echo form_submit('submit','Edit');
     echo form_close();
     echo form_open('blog/delete/'.$blog_item['id']);
-         echo form_submit('submit','Delete');
+    echo form_submit('submit','Delete');
     echo form_close();
-}
+  }
 endforeach; ?>
