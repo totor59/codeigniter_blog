@@ -33,7 +33,7 @@ class Blog_model extends CI_Model {
       'title' => $this->input->post('title'),
       'slug' => $slug,
       'content' => $this->input->post('content'),
-      'user_id' => $this->session->user_id
+      'user_id' => $this->session->id
     );
     if ( $id == 0 ) {
       // Si l'ID est égal a 0 on insère un nouvel article

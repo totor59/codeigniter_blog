@@ -18,7 +18,7 @@ class User_model extends CI_Model {
       $data = array(
         'username' => $username,
         'usertype' => $row->usertype,
-        'user_id' => $row->id,
+        'id' => $row->id,
         'logged_in' => true,
 
       );
@@ -39,14 +39,14 @@ class User_model extends CI_Model {
 
   public function is_admin() {
     // On vérifie sur le usertype de l'utilisateur = 'admin'
-    if ($this->session->usertype === 'admin') {
+    if ($this->session->usertype = 'admin') {
     return TRUE;
     }
   }
 
   public function is_owner($user_id) {
     // On vérifie si l'ID de l'utilisateur est égal au user_id du post
-    if($this->session->user_id === $user_id ) {
+    if($this->session->id == $user_id ) {
     return TRUE;
     }
   }
