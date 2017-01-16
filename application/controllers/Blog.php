@@ -3,6 +3,7 @@ class Blog extends CI_Controller {
   public function __construct()  {
     parent::__construct();
     $this->load->model('blog_model');
+    $this->load->model('user_model');
     $this->load->helper('url_helper');
     $this->load->helper('form');
     $this->load->library('form_validation');
@@ -24,7 +25,6 @@ class Blog extends CI_Controller {
         $this->output->enable_profiler(true);
     $data['blog_item'] = $this->blog_model->get_article($slug);
     $data['title'] = $data['blog_item']['title'];
-    $this->load->model('user_model');
     $data['is_admin'] = $this->user_model->is_admin();
     $data['is_owner'] = $this->user_model->is_owner($data['blog_item']['user_id']);
     if (empty($data['blog_item'])) {
@@ -37,7 +37,7 @@ class Blog extends CI_Controller {
   }
 
   public function create() {
-    if(!$data['is_logged_in']) {
+    if(!$this->user_model->is_logged_in()) {
       redirect(base_url().'blog/');
     }
     $data['title'] = 'Create a blog item';
