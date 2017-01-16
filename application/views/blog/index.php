@@ -7,15 +7,6 @@
   <p><a href="<?=site_url('blog/'.$blog_item['slug']) ?>">Lire la suite</a></p>
 
   <?php
-  //Si l'utilisateur est administrateur on affiche les boutons EDIT et DELETE
-  if($is_admin):
-    echo form_open('blog/update/'.$blog_item['id']);
-    echo form_submit('submit','Edit');
-    echo form_close();
-    echo form_open('blog/delete/'.$blog_item['id']);
-    echo form_submit('submit','Delete');
-    echo form_close();
-  endif;
 endforeach;
 
 // Si l'utilisateur est loggé on affiche le bouton log out

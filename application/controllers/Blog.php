@@ -9,11 +9,8 @@ class Blog extends CI_Controller {
   }
 
   public function index() {
+    $this->load->library('pagination');
     $this->output->enable_profiler(true);
-    $data['is_admin'] = FALSE;
-    if ($this->session->usertype === 'admin'){
-    $data['is_admin'] = TRUE;
-    }
     $this->load->model('user_model');
     $data['is_logged_in'] = $this->user_model->is_logged_in();
     $data['blog'] = $this->blog_model->get_article();
@@ -23,19 +20,24 @@ class Blog extends CI_Controller {
     $this->load->view('templates/footer');
   }
 
-  public function view($slug = NULL) {
+  public function view($slug) {
+        $this->output->enable_profiler(true);
     $data['blog_item'] = $this->blog_model->get_article($slug);
+    $data['title'] = $data['blog_item']['title'];
+    $this->load->model('user_model');
+    $data['is_admin'] = $this->user_model->is_admin();
+    $data['is_owner'] = $this->user_model->is_owner($data['blog_item']['user_id']);
     if (empty($data['blog_item'])) {
       show_404();
     }
-    $data['title'] = $data['blog_item']['title'];
     $this->load->view('templates/header', $data);
+    var_dump($data);
     $this->load->view('blog/view', $data);
     $this->load->view('templates/footer');
   }
 
   public function create() {
-    if(!$this->check_permissions('admin')) {
+    if(!$data['is_logged_in']) {
       redirect(base_url().'blog/');
     }
     $data['title'] = 'Create a blog item';
@@ -54,19 +56,17 @@ class Blog extends CI_Controller {
   }
 
   public function delete($id) {
-    if(!$this->check_permissions('admin')) {
-      redirect(base_url().'blog/');
+    if(!$data['is_admin'] OR !$data['is_owner']) {
+            redirect(base_url().'blog/');
     }
     $this->blog_model->delete_article($id);
     $this->load->view('blog/delete_success');
   }
 
   public function update($id) {
-    if(!$this->check_permissions('admin')) {
-      redirect(base_url().'blog/');
+    if(!$data['is_admin'] OR !$data['is_owner']) {
+            redirect(base_url().'blog/');
     }
-    $data['blog_item'] = $this->blog_model->get_article_by_id($id);
-    $data['title'] = 'Edit a blog item';
     $this->form_validation->set_rules('title', 'Title', 'required');
     $this->form_validation->set_rules('content', 'Text', 'required');
     if ($this->form_validation->run() === FALSE) {
@@ -82,10 +82,17 @@ class Blog extends CI_Controller {
 
   function check_permissions($required) {
     $usertype = $this->session->userdata('usertype');
-    if($required == 'admin') {
+    $this->output->enable_profiler(true);
+    if($required == 'user') {
+      if($usertype){
+        return TRUE;
+      }
+    } elseif($required == 'admin') {
       if($usertype == 'admin') {
         return TRUE;
       }
     }
   }
+
+
 }

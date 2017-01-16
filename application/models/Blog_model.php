@@ -7,12 +7,18 @@ class Blog_model extends CI_Model {
 
   public function get_article($slug = FALSE) {
     if ($slug === FALSE) {
-      $query = $this->db->get('article');
-      return $query->result_array();
+      $query = $this->db->select('*')
+                          ->from('article')
+                          ->order_by('date', 'DESC');
+      return $query->get()->result_array();
+    } else {
+      $query = $this->db->select('*')
+                          ->from('article')
+                          ->where('slug', $slug);
+      return $query->get()->row_array();
     }
-    $query = $this->db->get_where('article', array('slug' => $slug));
-    return $query->row_array();
   }
+
 
   public function get_article_by_id($id)  {
     $query = $this->db->get_where('article', array('id' => $id));
@@ -26,7 +32,8 @@ class Blog_model extends CI_Model {
     $data = array(
       'title' => $this->input->post('title'),
       'slug' => $slug,
-      'content' => $this->input->post('content')
+      'content' => $this->input->post('content'),
+      'user_id' => $this->session->user_id
     );
     if ( $id == 0 ) {
       // Si l'ID est égal a 0 on insère un nouvel article
