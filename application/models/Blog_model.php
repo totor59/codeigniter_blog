@@ -5,6 +5,8 @@ class Blog_model extends CI_Model {
     $this->load->database();
   }
 
+
+
   public function get_article($slug = FALSE) {
     if ($slug === FALSE) {
       $query = $this->db->select('*')
@@ -32,8 +34,7 @@ class Blog_model extends CI_Model {
     $data = array(
       'title' => $this->input->post('title'),
       'slug' => $slug,
-      'content' => $this->input->post('content'),
-      'user_id' => $this->session->id
+      'content' => $this->input->post('content')
     );
     if ( $id == 0 ) {
       // Si l'ID est égal a 0 on insère un nouvel article
