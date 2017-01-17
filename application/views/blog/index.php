@@ -8,10 +8,3 @@
 
   <?php
 endforeach;
-
-// Si l'utilisateur est loggé on affiche le bouton log out
-if($is_logged_in) {
-  echo form_open('admin/logout/');
-  echo form_submit('submit','Log out');
-  echo form_close();
-}
